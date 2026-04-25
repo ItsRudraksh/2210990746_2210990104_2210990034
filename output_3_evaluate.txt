@@ -1,0 +1,585 @@
+(venv) PS C:\Coding\Research-Work> uv run .\3_evaluate.py
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 7239.68it/s]
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED    :can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+============================================================
+QUERY: Where is the `get_send_file_max_age` method defined and how does it determine the cache value?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\app.py
+Content Snippet:
+def get_send_file_max_age(self, filename: str | None) -> int | None:
+        """Used by :func:`send_file` to determine the ``max_age`` cache
+        value for a given file path if it wasn't passed.
+
+        By default, this returns :data:`SEND_FILE_MAX_AGE_DEFAULT` from
+        the configuration of ...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\app.py
+Content Snippet:
+def get_send_file_max_age(self, filename: str | None) -> int | None:
+        """Used by :func:`send_file` to determine the ``max_age`` cache
+        value for a given file path if it wasn't passed.
+
+        By default, this returns :data:`SEND_FILE_MAX_AGE_DEFAULT` from
+        the configuration of ...
+
+
+============================================================
+QUERY: Explain the `open_resource` method signature and parameters in the `Flask` class.
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\app-1.py
+Content Snippet:
+For more information about resource loading, see :func:`open_resource`.
+
+    Usually you create a :class:`Flask` instance in your main module or
+    in the :file:`__init__.py` file of your package like this::
+
+        from flask import Flask
+        app = Flask(__name__)
+
+    .. admonition:: About t...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\app.py
+Content Snippet:
+class Flask(App):
+    """The flask object implements a WSGI application and acts as the central
+    object.  It is passed the name of the module or package of the
+    application.  Once it is created it will act as a central registry for
+    the view functions, the URL rules, template configuration ...
+
+
+============================================================
+QUERY: How does `create_url_adapter` configure the MapAdapter when subdomain matching is disabled?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\app.py
+Content Snippet:
+def create_url_adapter(self, request: Request | None) -> MapAdapter | None:
+        """Creates a URL adapter for the given request. The URL adapter
+        is created at a point where the request context is not yet set
+        up so the request is passed explicitly.
+
+        .. versionchanged:: 3.1
+...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\app.py
+Content Snippet:
+def create_url_adapter(self, request: Request | None) -> MapAdapter | None:
+        """Creates a URL adapter for the given request. The URL adapter
+        is created at a point where the request context is not yet set
+        up so the request is passed explicitly.
+
+        .. versionchanged:: 3.1
+...
+
+
+============================================================
+QUERY: What are the default configuration values initialized in `default_config` of the Flask application?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\config.py
+Content Snippet:
+export YOURAPPLICATION_SETTINGS='/path/to/config/file'
+
+    On windows use `set` instead.
+
+    :param root_path: path to which files are read relative from.  When the
+                      config object is created by the application, this is
+                      the application's :attr:`~flask.Flas...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\config.py
+Content Snippet:
+export YOURAPPLICATION_SETTINGS='/path/to/config/file'
+
+    On windows use `set` instead.
+
+    :param root_path: path to which files are read relative from.  When the
+                      config object is created by the application, this is
+                      the application's :attr:`~flask.Flas...
+
+
+============================================================
+QUERY: How does the `send_static_file` method differ between `Flask` and `Blueprint` classes?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\blueprints.py
+Content Snippet:
+Note this is a duplicate of the same method in the Flask
+        class.
+
+        .. versionadded:: 0.5
+
+        """
+        if not self.has_static_folder:
+            raise RuntimeError("'static_folder' must be set to serve static_files.")
+
+        # send_file only knows to call get_send_file_max_ag...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\blueprints-1.py
+Content Snippet:
+class Blueprint(Scaffold):
+    """Represents a blueprint, a collection of routes and other
+    app-related functions that can be registered on a real application
+    later.
+
+    A blueprint is an object that allows defining application functions
+    without requiring an application object ahead of t...
+
+
+============================================================
+QUERY: How does the `copy_current_request_context` decorator preserve the request environment for background tasks?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\ctx.py
+Content Snippet:
+def copy(self) -> te.Self:
+        """Create a new context with the same data objects as this context. See
+        :func:`.copy_current_request_context`.
+
+        .. versionchanged:: 1.1
+            The current session data is used instead of reloading the original data.
+
+        .. versionadded:: 0...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\ctx.py
+Content Snippet:
+def copy_current_request_context(f: F) -> F:
+    """Decorate a function to run inside the current request context. This can
+    be used when starting a background task, otherwise it will not see the app
+    and request objects that were active in the parent.
+
+    .. warning::
+
+        Due to the fol...
+
+
+============================================================
+QUERY: What is the purpose of `_AppCtxGlobals` and how does it implement property access?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\ctx.py
+Content Snippet:
+Creating an app context automatically creates this object, which is
+    made available as the :data:`.g` proxy.
+
+    .. describe:: 'key' in g
+
+        Check whether an attribute is present.
+
+        .. versionadded:: 0.10
+
+    .. describe:: iter(g)
+
+        Return an iterator over the attribute name...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\ctx.py
+Content Snippet:
+class _AppCtxGlobals:
+    """A plain object. Used as a namespace for storing data during an
+    application context.
+
+    Creating an app context automatically creates this object, which is
+    made available as the :data:`.g` proxy.
+
+    .. describe:: 'key' in g
+
+        Check whether an attribute ...
+
+
+============================================================
+QUERY: Explain the lifecycle and teardown process inside the `AppContext.pop()` method.
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\ctx.py
+Content Snippet:
+def pop(self, exc: BaseException | None = None) -> None:
+        """Pop this context so that it is no longer the active context. Then
+        call teardown functions and signals.
+
+        Typically, this is not used directly. Instead, use a ``with`` block
+        to manage the context.
+
+        This...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\ctx.py
+Content Snippet:
+def pop(self, exc: BaseException | None = None) -> None:
+        """Pop this context so that it is no longer the active context. Then
+        call teardown functions and signals.
+
+        Typically, this is not used directly. Instead, use a ``with`` block
+        to manage the context.
+
+        This...
+
+
+============================================================
+QUERY: How does `has_request_context()` verify if a request is currently active?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\ctx.py
+Content Snippet:
+Typically, this is not used directly. Instead, use a ``with`` block
+        to manage the context.
+
+        In some situations, such as streaming or testing, the context may be
+        pushed multiple times. It will only trigger matching and signals if it
+        is not currently pushed.
+        """...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\ctx.py
+Content Snippet:
+def has_request_context() -> bool:
+    """Test if an app context is active and if it has request information.
+
+    .. code-block:: python
+
+        from flask import has_request_context, request
+
+        if has_request_context():
+            remote_addr = request.remote_addr
+
+    If a request context...
+
+
+============================================================
+QUERY: In the `Request` class, how does the `max_form_memory_size` property fallback to the application configuration?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\wrappers.py
+Content Snippet:
+@max_form_memory_size.setter
+    def max_form_memory_size(self, value: int | None) -> None:
+        self._max_form_memory_size = value
+
+    @property  # type: ignore[override]
+    def max_form_parts(self) -> int | None:
+        """The maximum number of fields that may be present in a
+        ``multi...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\wrappers.py
+Content Snippet:
+@max_form_memory_size.setter
+    def max_form_memory_size(self, value: int | None) -> None:
+        self._max_form_memory_size = value
+
+    @property  # type: ignore[override]
+    def max_form_parts(self) -> int | None:
+        """The maximum number of fields that may be present in a
+        ``multi...
+
+
+============================================================
+QUERY: Explain how the `blueprint` property determines the currently active blueprint from the endpoint name.
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\blueprints-1.py
+Content Snippet:
+to the app's template search path. The path is relative to the
+        blueprint's root path. Blueprint templates are disabled by
+        default. Blueprint templates have a lower precedence than those
+        in the app's templates folder.
+    :param url_prefix: A path to prepend to all of the blue...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\blueprints-1.py
+Content Snippet:
+to the app's template search path. The path is relative to the
+        blueprint's root path. Blueprint templates are disabled by
+        default. Blueprint templates have a lower precedence than those
+        in the app's templates folder.
+    :param url_prefix: A path to prepend to all of the blue...
+
+
+============================================================
+QUERY: What happens when `on_json_loading_failed` catches a `BadRequest` during JSON parsing in debug mode?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\app.py
+Content Snippet:
+Always sends the :data:`got_request_exception` signal.
+
+        If :data:`PROPAGATE_EXCEPTIONS` is ``True``, such as in debug
+        mode, the error will be re-raised so that the debugger can
+        display it. Otherwise, the original exception is logged, and
+        an :exc:`~werkzeug.exceptions....
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\app.py
+Content Snippet:
+Always sends the :data:`got_request_exception` signal.
+
+        If :data:`PROPAGATE_EXCEPTIONS` is ``True``, such as in debug
+        mode, the error will be re-raised so that the debugger can
+        display it. Otherwise, the original exception is logged, and
+        an :exc:`~werkzeug.exceptions....
+
+
+============================================================
+QUERY: How does the `Response` class configure its `max_cookie_size` attribute differently inside and outside an app context?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\test_basic.py
+Content Snippet:
+def test_max_cookie_size(app, client, recwarn):
+    app.config["MAX_COOKIE_SIZE"] = 100
+
+    # outside app context, default to Werkzeug static value,
+    # which is also the default config
+    response = flask.Response()
+    default = flask.Flask.default_config["MAX_COOKIE_SIZE"]
+    assert response...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\wrappers.py
+Content Snippet:
+autocorrect_location_header = False
+
+    @property
+    def max_cookie_size(self) -> int:  # type: ignore
+        """Read-only view of the :data:`MAX_COOKIE_SIZE` config key.
+
+        See :attr:`~werkzeug.wrappers.Response.max_cookie_size` in
+        Werkzeug's docs.
+        """
+        if current_ap...
+
+
+============================================================
+QUERY: Describe the process `find_best_app` uses to locate a Flask application instance within a module.
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\cli.py
+Content Snippet:
+from .app import Flask
+
+
+class NoAppException(click.UsageError):
+    """Raised if an application cannot be found or loaded."""
+
+
+def find_best_app(module: ModuleType) -> Flask:
+    """Given a module instance this tries to find the best possible
+    application in the module or raises an exception.
+ ...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\cli.py
+Content Snippet:
+def find_best_app(module: ModuleType) -> Flask:
+    """Given a module instance this tries to find the best possible
+    application in the module or raises an exception.
+    """
+    from . import Flask
+
+    # Search for the most common names first.
+    for attr_name in ("app", "application"):
+      ...
+
+
+============================================================
+QUERY: How does the `ScriptInfo.load_app` method handle loading an application if `create_app` is not provided?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\test_cli.py
+Content Snippet:
+# import app with module's absolute path
+    cli_app_path = str(test_path / "cliapp" / "app.py")
+
+    obj = ScriptInfo(app_import_path=cli_app_path)
+    app = obj.load_app()
+    assert app.name == "testapp"
+    assert obj.load_app() is app
+    obj = ScriptInfo(app_import_path=f"{cli_app_path}:testap...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\test_cli.py
+Content Snippet:
+def test_scriptinfo(test_apps, monkeypatch):
+    obj = ScriptInfo(app_import_path="cliapp.app:testapp")
+    app = obj.load_app()
+    assert app.name == "testapp"
+    assert obj.load_app() is app
+
+    # import app with module's absolute path
+    cli_app_path = str(test_path / "cliapp" / "app.py")
+
+  ...
+
+
+============================================================
+QUERY: What does the `with_appcontext` decorator do for Click commands?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\cli.py
+Content Snippet:
+F = t.TypeVar("F", bound=t.Callable[..., t.Any])
+
+
+def with_appcontext(f: F) -> F:
+    """Wraps a callback so that it's guaranteed to be executed with the
+    script's application context.
+
+    Custom commands (and their options) registered under ``app.cli`` or
+    ``blueprint.cli`` will always have...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\cli.py
+Content Snippet:
+def with_appcontext(f: F) -> F:
+    """Wraps a callback so that it's guaranteed to be executed with the
+    script's application context.
+
+    Custom commands (and their options) registered under ``app.cli`` or
+    ``blueprint.cli`` will always have an app context available, this
+    decorator is no...
+
+
+============================================================
+QUERY: How does `load_dotenv` prioritize between a provided file path, `.env`, and `.flaskenv`?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\cli.py
+Content Snippet:
+def load_dotenv(
+    path: str | os.PathLike[str] | None = None, load_defaults: bool = True
+) -> bool:
+    """Load "dotenv" files to set environment variables. A given path takes
+    precedence over ``.env``, which takes precedence over ``.flaskenv``. After
+    loading and combining these files, val...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\cli.py
+Content Snippet:
+def load_dotenv(
+    path: str | os.PathLike[str] | None = None, load_defaults: bool = True
+) -> bool:
+    """Load "dotenv" files to set environment variables. A given path takes
+    precedence over ``.env``, which takes precedence over ``.flaskenv``. After
+    loading and combining these files, val...
+
+
+============================================================
+QUERY: Explain how the `Config.from_prefixed_env` method parses nested dictionary structures from environment variables.
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\config.py
+Content Snippet:
+def from_prefixed_env(
+        self, prefix: str = "FLASK", *, loads: t.Callable[[str], t.Any] = json.loads
+    ) -> bool:
+        """Load any environment variables that start with ``FLASK_``,
+        dropping the prefix from the env key for the config key. Values
+        are passed through a loadin...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\config.py
+Content Snippet:
+def from_prefixed_env(
+        self, prefix: str = "FLASK", *, loads: t.Callable[[str], t.Any] = json.loads
+    ) -> bool:
+        """Load any environment variables that start with ``FLASK_``,
+        dropping the prefix from the env key for the config key. Values
+        are passed through a loadin...
+
+
+============================================================
+QUERY: How does the `ConfigAttribute` descriptor fetch and optionally convert configuration values?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\config.py
+Content Snippet:
+rv = obj.config[self.__name__]
+
+        if self.get_converter is not None:
+            rv = self.get_converter(rv)
+
+        return rv  # type: ignore[no-any-return]
+
+    def __set__(self, obj: App, value: t.Any) -> None:
+        obj.config[self.__name__] = value
+
+
+class Config(dict):  # type: ignore...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\config.py
+Content Snippet:
+class ConfigAttribute(t.Generic[T]):
+    """Makes an attribute forward to the config"""
+
+    def __init__(
+        self, name: str, get_converter: t.Callable[[t.Any], T] | None = None
+    ) -> None:
+        self.__name__ = name
+        self.get_converter = get_converter
+
+    @t.overload
+    def __ge...
+
+
+============================================================
+QUERY: What is the difference between `from_pyfile` and `from_object` in terms of how they load configuration values?
+============================================================
+
+--- BASELINE RETRIEVAL (Pipeline A) ---
+File: Python-Files\config.py
+Content Snippet:
+app.config.from_object('yourapplication.default_config')
+            from yourapplication import default_config
+            app.config.from_object(default_config)
+
+        Nothing is done to the object before loading. If the object is a
+        class and has ``@property`` attributes, it needs to be
+...
+
+--- SEMANTIC RETRIEVAL (Pipeline B) ---
+File: Python-Files\config.py
+Content Snippet:
+app.config.from_object('yourapplication.default_config')
+            from yourapplication import default_config
+            app.config.from_object(default_config)
+
+        Nothing is done to the object before loading. If the object is a
+        class and has ``@property`` attributes, it needs to be
+...
+
+(venv) PS C:\Coding\Research-Work> 

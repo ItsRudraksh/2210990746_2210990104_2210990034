@@ -1,0 +1,15 @@
+(venv) PS C:\Coding\Research-Work> uv run .\2_semantic_pipeline.py
+Loading files from Python-Files directory...
+Created 861 semantic chunks.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 7259.14it/s]
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED    :can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Building Semantic Vector Database...
+Semantic Database saved to './chroma_db_semantic'!
+(venv) PS C:\Coding\Research-Work> 

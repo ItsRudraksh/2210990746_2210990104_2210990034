@@ -1,0 +1,16 @@
+(venv) PS C:\Coding\Research-Work> uv run .\1_baseline_pipeline.py
+Loading files from Python-Files directory...
+Loaded 83 Python files.
+Created 804 baseline chunks.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 3687.25it/s]
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED    :can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Building Baseline Vector Database...
+Baseline Database saved to './chroma_db_baseline'!
+(venv) PS C:\Coding\Research-Work> 
