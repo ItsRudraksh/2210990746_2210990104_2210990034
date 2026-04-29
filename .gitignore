@@ -56,3 +56,7 @@ desktop.ini
 Python-Files/*.py
 chroma_db_baseline/**
 chroma_db_semantic/**
+*.docx
+*.doc
+*.pptx
+*.ppt
