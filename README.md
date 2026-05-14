@@ -1,5 +1,16 @@
 # Research-Work RAG Comparison Project
 
+## Project Details
+
+- Roll Numbers and Names:
+  - Rudraksh Kapoor - 2210990746
+  - Anshul Arora - 2210990141
+  - Abhishek - 2210990043
+- Project Title: Enhancing Code Retrieval Accuracy in Developer-Oriented RAG Systems using Semantic Chunking
+- Type: Research Paper
+- Team Details: Team 32
+- Current Status: Submitted to confrence
+
 This repository contains a small research workflow for comparing two retrieval-augmented generation (RAG) indexing strategies over an extracted copy of the Flask codebase.
 
 The core idea is simple:
